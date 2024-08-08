@@ -13,13 +13,13 @@ export default function CourseRoutes(app) {
   };
 
   const updateCourse = async (req, res) => {
-    const { courseId } = req.params;
-    const status = await dao.updateCourse(courseId, req.body);
+    const { cid } = req.params;
+    const status = await dao.updateCourse(cid, req.body);
     res.json(status);
   };
 
   const deleteCourse = async (req, res) => { 
-    const status = await dao.deleteCourse(req.params.userId);
+    const status = await dao.deleteCourse(req.params.id);
     res.json(status); 
   };
 
