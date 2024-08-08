@@ -1,36 +1,35 @@
-import Database from "../Database/index.js";
+import * as dao from "./dao.js";
 
 export default function ModuleRoutes(app) {
 
-    app.get("/api/courses/:cid/modules", (req, res) => {
-        const { cid } = req.params;
-        const modules = Database.modules.filter((m) => m.course === cid);
-        res.json(modules);
-    });
+    const createModule = async (req, res) => { 
+        const { courseId } = req.params;
+        const newModule = {...req.body, course: courseId}
+        const module = await dao.createModule(newModule);
+        res.json(module);
+    };
+
+    const findModulesForCourse = async (req, res) => { 
+        const { courseId } = req.params; 
+        console.log(courseId);
+        const modules = await dao.findModulesForCourse(courseId); 
+        res.json(modules) 
+    };
     
-    app.post("/api/courses/:cid/modules", (req, res) => {
-        const { cid } = req.params;
-        const newModule = { ...req.body, course: cid, 
-                            _id: new Date().getTime().toString(),
-        };
-        Database.modules.push(newModule);
-        res.send(newModule);
-    });
+    const updateModule = async (req, res) => {
+        const { moduleId } = req.params;
+        const status = await dao.updateModule(moduleId, req.body);
+        res.json(status);
+    };
 
-    app.delete("/api/modules/:mid", (req, res) => {
-        const { mid } = req.params;
-        Database.modules = Database.modules.filter((m) => m._id !== mid);
-        res.sendStatus(200);
-    });
-
-    app.put("/api/modules/:mid", (req, res) => {
-        const { mid } = req.params;
-        const index = Database.modules.findIndex((m) => m._id === mid);
-        Database.modules[index] = {
-            ...Database.modules[index], 
-            ...req.body
-        };
-        res.sendStatus(204);
-    });
+    const deleteModule = async (req, res) => { 
+        const status = await dao.deleteModule(req.params.mid);
+        res.json(status); 
+    };
+    
+    app.post("/api/courses/:cid/modules", createModule);
+    app.get("/api/courses/:cid/modules", findModulesForCourse);
+    app.put("/api/modules/:mid", updateModule);
+    app.delete("/api/modules/:mid", deleteModule);
 
 }
