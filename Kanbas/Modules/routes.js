@@ -18,12 +18,15 @@ export default function ModuleRoutes(app) {
     
     const updateModule = async (req, res) => {
         const { mid } = req.params;
+        console.log(mid);
         const status = await dao.updateModule(mid, req.body);
         res.json(status);
     };
 
     const deleteModule = async (req, res) => { 
-        const status = await dao.deleteModule(req.params.mid);
+        const { mid } = req.params;
+        console.log(mid);
+        const status = await dao.deleteModule(mid);
         res.json(status); 
     };
     
