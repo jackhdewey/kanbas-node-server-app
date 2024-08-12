@@ -3,8 +3,15 @@ import * as dao from "./dao.js";
 export default function CourseRoutes(app) {
 
   const createCourse = async (req, res) => { 
-    const course = await dao.createCourse(req.body);
-    res.json(course);
+    let course = await dao.findCourseByName(req.body.name);
+    console.log(course[0]);
+    if (!course[0]) {
+      console.log("course NOT FOUND, CREATING COURSE");
+      course = await dao.createCourse(req.body);
+      res.json(course);
+    } else {
+      res.status(401).json({ message: "Unable to create course, duplicate name"});
+    }
   };
 
   const findAllCourses = async (req, res) => { 

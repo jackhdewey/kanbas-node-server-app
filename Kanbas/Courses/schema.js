@@ -9,7 +9,7 @@ const courseSchema = new mongoose.Schema({
     startDate: Date,
     endDate: Date,
     author: String,
-    students: []
+    students: [String]
   },
   { collection: "courses" }
 );

@@ -9,7 +9,6 @@ export default function AssignmentRoutes(app) {
     });
     
     app.post("/api/courses/:cid/assignments", (req, res) => {
-        const { cid } = req.params;
         const newAssignment = { ...req.body, };
         Database.assignments.push(newAssignment);
         res.send(newAssignment);
