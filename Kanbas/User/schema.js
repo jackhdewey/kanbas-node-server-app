@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     },
     loginId: String,
     section: String,
+    courses: [],
     lastActivity: Date,
     totalActivity: String,
   },
