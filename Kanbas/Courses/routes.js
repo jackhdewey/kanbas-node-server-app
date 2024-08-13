@@ -4,7 +4,6 @@ export default function CourseRoutes(app) {
 
   const createCourse = async (req, res) => { 
     let course = await dao.findCourseByName(req.body.name);
-    console.log(course[0]);
     if (!course[0]) {
       console.log("course NOT FOUND, CREATING COURSE");
       course = await dao.createCourse(req.body);
@@ -26,13 +25,13 @@ export default function CourseRoutes(app) {
   };
 
   const deleteCourse = async (req, res) => { 
-    const status = await dao.deleteCourse(req.params.id);
+    const status = await dao.deleteCourse(req.params.cid);
     res.json(status); 
   };
 
   app.post("/api/courses", createCourse);
   app.get("/api/courses", findAllCourses);
-  app.put("/api/courses/:id", updateCourse);
-  app.delete("/api/courses/:id", deleteCourse);
+  app.put("/api/courses/:cid", updateCourse);
+  app.delete("/api/courses/:cid", deleteCourse);
 }
 
