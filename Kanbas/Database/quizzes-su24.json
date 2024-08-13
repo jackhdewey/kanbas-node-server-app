@@ -1,0 +1,14 @@
+[
+{
+    "_id": {"$oid": "66bba5dc0803b0cc7eee885a"},
+    "qType": "GRADED",
+    "points": 10,
+    "group": "QUIZZES",
+    "timeLimit": 10,
+    "multipleAttempts": false,
+    "course": "",
+    "dueDate": "2024-08-21",
+    "available": "2024-08-14",
+    "untilDate": "2024-08-28"
+  }
+]

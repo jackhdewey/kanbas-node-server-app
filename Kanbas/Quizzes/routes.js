@@ -10,22 +10,24 @@ export default function QuizRoutes(app) {
     };
 
     const findQuizzesForCourse = async (req, res) => { 
+        console.log("FINDING QUIZZES ", req.body);
         const { cid } = req.params; 
-        console.log(cid);
+        console.log("COURSE ID: ", cid);
         const quizzes = await dao.findQuizzesForCourse(cid); 
-        res.json(quizzes) 
+        console.log("QUIZZES FOUND: ", quizzes);
+        res.json(quizzes); 
     };
     
     const updateQuiz = async (req, res) => {
         const { qid } = req.params;
-        console.log(qid);
+        console.log("QUIZ ID: ", qid);
         const status = await dao.updateQuiz(qid, req.body);
         res.json(status);
     };
 
     const deleteQuiz = async (req, res) => { 
         const { qid } = req.params;
-        console.log(qid);
+        console.log("QUIZ ID: ", qid);
         const status = await dao.deleteQuiz(qid);
         res.json(status); 
     };

@@ -13,7 +13,7 @@ export const findUsersByPartialName = (partialName) => {
     });
 };
 export const findUsersByRole = (role) => model.find({ role: role });
-export const findUserById = (userId) => model.findById({_id, userId});
+export const findUserById = (userId) => model.findById({userId});
 export const findUserByUsername = (username) => model.findOne({ username: username });
 export const findUserByCredentials = (username, password) =>  model.findOne({ username, password });
 
