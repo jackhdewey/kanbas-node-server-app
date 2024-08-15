@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const quizSchema = new mongoose.Schema({
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     quiz_type: {
       type: String,
       enum: ["GRADED", "PRACTICE", "GRADED SURVEY", "UNGRADED SURVEY"],
@@ -13,7 +13,7 @@ const quizSchema = new mongoose.Schema({
       enum: ["QUIZZES", "EXAMS", "ASSIGNMENTS", "PROJECT"],
       default: "QUIZZES"
     },
-    questions: [],
+    questions: [{}],
     shuffle_answers: { 
       type: String, 
       enum: ["YES", "NO"],
@@ -50,7 +50,8 @@ const quizSchema = new mongoose.Schema({
     due_date: String,
     date_available: String,
     available_until: String,
-    course: { type: String, required: true }
+    course: { type: String, required: true },
+    published: {type: Boolean, default: false}
   },
   { collection: "quizzes" }
 );
